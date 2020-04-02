@@ -93,6 +93,7 @@
         .then(function(profile) {
           console.log(profile)
           if (!profile) return
+          profileinfo.style.display  = 'block'
           document.getElementById('profilepicturediv').innerHTML = '<img src="' + profile.pictureUrl + '" />'
           document.getElementById('useridprofilefield').textContent = profile.userId
           document.getElementById('displaynamefield').textContent = profile.displayName
