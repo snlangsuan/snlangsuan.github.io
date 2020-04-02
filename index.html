@@ -84,9 +84,18 @@
           loading.style.display = 'none'
           console.log('Open with LINE app', liff.isInClient())
           console.log('Is log in', liff.isLoggedIn())
-          if (!liff.isLoggedIn()) {
+          if (liff.isLoggedIn()) {
+            return liff.getProfile()
+          } else {
             btnlogin.style.display = 'block'
           }
+        })
+        .then(function(profile) {
+          if (!profile) return
+          document.getElementById('profilepicturediv').innerHTML = '<img src="' + profile.pictureUrl + '" />'
+          document.getElementById('useridprofilefield').textContent = profile.userId
+          document.getElementById('displaynamefield').textContent = profile.displayName
+          document.getElementById('statusmessagefield').textContent = profile.statusMessage
         })
         .catch(function(error) {
           // put your code (show when error)
