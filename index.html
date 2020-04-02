@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample LINE LIFF</title>
+  <style>
+    #btnlogin {
+      display: none;
+      width: 160px;
+      padding: 8px;
+      background-color: #00C300;
+      border: none;
+      border-radius: 4px;
+      color: #ffffff;
+      outline: none;
+      margin: auto;
+    }
+    #btnlogin:hover {
+      background-color: #00E000;
+      cursor: pointer;
+    }
+    #profileinfo {
+      display: none;
+      text-align: center;
+    }
+    table {
+      border-collapse: collapse;
+      margin: auto;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align: center;">Start LINE LIFF</h1>
+  <img
+    id="loading"
+    src="https://miro.medium.com/max/1600/1*CsJ05WEGfunYMLGfsT2sXA.gif"
+    style="display: block;width: 200px;height: auto;margin: auto;"
+  />
+  <button id="btnlogin">Log in with LINE</button>
+  <div id="profileinfo">
+    <h2>Profile</h2>
+    <div id="profilepicturediv"></div>
+    <table>
+        <tr>
+            <th>userId</th>
+            <td id="useridprofilefield"></td>
+        </tr>
+        <tr>
+            <th>displayName</th>
+            <td id="displaynamefield"></td>
+        </tr>
+        <tr>
+            <th>statusMessage</th>
+            <td id="statusmessagefield"></td>
+        </tr>
+    </table>
+</div>
+  <script src="https://cdn.bootcss.com/vConsole/3.3.3/vconsole.min.js"></script>
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+  <script>
+    var vConsole = new VConsole()
+    var btnlogin = document.getElementById('btnlogin')
+    var profileinfo = document.getElementById('profileinfo')
+    var loading = document.getElementById('loading')
+    loading.style.display = 'block'
+    btnlogin.style.display = 'none'
+    profileinfo.style.display  = 'none'
+
+    btnlogin.addEventListener('click', function(e) {
+      liff.login()
+    })
+
+    window.onload = function(e) {
+      console.log('document ready!')
+      liff
+        .init({
+          liffId: '1654034012-reNXW8Gm'
+        })
+        .then(function() {
+          loading.style.display = 'none'
+          console.log('Open with LINE app', liff.isInClient())
+          console.log('Is log in', liff.isLoggedIn())
+          if (!liff.isLoggedIn()) {
+            btnlogin.style.display = 'block'
+          }
+        })
+        .catch(function(error) {
+          // put your code (show when error)
+        })
+    }
+  </script>
+</body>
+</html>
