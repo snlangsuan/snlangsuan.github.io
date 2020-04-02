@@ -91,6 +91,7 @@
           }
         })
         .then(function(profile) {
+          console.log(profile)
           if (!profile) return
           document.getElementById('profilepicturediv').innerHTML = '<img src="' + profile.pictureUrl + '" />'
           document.getElementById('useridprofilefield').textContent = profile.userId
